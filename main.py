@@ -1,27 +1,12 @@
-# ------------------------------------------
-# SUPER STAR MART BOT - BASIC STARTER
-# Telegram Stars Store (skeleton)
-# ------------------------------------------
-
 import logging
-from telegram import (
-    Update, InlineKeyboardMarkup, InlineKeyboardButton,
-    LabeledPrice
-)
-from telegram.ext import (
-    ApplicationBuilder, CommandHandler,
-    ContextTypes
-)
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 BOT_TOKEN = "7997403475:AAESngpsopLXiZr4iVfqDbLy0XFj7kCFsjg"
 
-
-# ------------------------------------------
-# START COMMAND
-# ------------------------------------------
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
@@ -33,7 +18,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ]
 
     await update.message.reply_text(
-        "⭐ WELCOME TO SUPER STAR MART ⭐\n\n"
+        "⭐ *WELCOME TO SUPER STAR MART* ⭐\n\n"
         "Buy digital goods using Telegram Stars.\n"
         "Choose a category below:",
         reply_markup=InlineKeyboardMarkup(keyboard),
@@ -41,17 +26,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
-# ------------------------------------------
-# BOOTSTRAP — PTB v20+ COMPATIBLE
-# ------------------------------------------
-
 async def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
 
-    # handlers
     app.add_handler(CommandHandler("start", start))
 
-    # V20+ correct startup
     await app.initialize()
     await app.start()
     await app.run_polling()
