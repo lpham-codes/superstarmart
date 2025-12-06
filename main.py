@@ -14,7 +14,7 @@ from telegram.ext import (
 )
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 BOT_TOKEN = "7997403475:AAESngpsopLXiZr4iVfqDbLy0XFj7kCFsjg"
 PROVIDER_TOKEN = ""  # Stars Payments
@@ -33,7 +33,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ]
 
     await update.message.reply_text(
-        "⭐ *WELCOME TO SUPER STAR MART* ⭐\n\n"
+        "⭐ WELCOME TO SUPER STAR MART ⭐\n\n"
         "Buy digital goods using Telegram Stars.\n"
         "Choose a category below:",
         reply_markup=InlineKeyboardMarkup(keyboard),
@@ -41,14 +41,19 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 # ------------------------------------------
-# BOOTSTRAP
+# BOOTSTRAP (ASYNC)
 # ------------------------------------------
 
-def main():
+async def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
     app.add_handler(CommandHandler("start", start))
-    app.run_polling()
 
-if __name__ == "__main__":
+    logger.info("Bot is starting…")
+    await app.initialize()
+    await app.start()
+    await app.updater.start_polling()
+    await app.updater.wait_for_stop()
+
+if _name_ == "_main_":
     import asyncio
     asyncio.run(main())
