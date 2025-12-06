@@ -9,15 +9,15 @@ from telegram import (
     LabeledPrice
 )
 from telegram.ext import (
-    ApplicationBuilder, CommandHandler, CallbackQueryHandler,
-    MessageHandler, filters, ContextTypes, PreCheckoutQueryHandler
+    ApplicationBuilder, CommandHandler,
+    ContextTypes
 )
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 BOT_TOKEN = "7997403475:AAESngpsopLXiZr4iVfqDbLy0XFj7kCFsjg"
-PROVIDER_TOKEN = ""  # Stars Payments
+
 
 # ------------------------------------------
 # START COMMAND
@@ -40,20 +40,23 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="Markdown"
     )
 
+
 # ------------------------------------------
-# BOOTSTRAP (ASYNC)
+# BOOTSTRAP — PTB v20+ COMPATIBLE
 # ------------------------------------------
 
 async def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
+
+    # handlers
     app.add_handler(CommandHandler("start", start))
 
-    logger.info("Bot is starting…")
+    # V20+ correct startup
     await app.initialize()
     await app.start()
-    await app.updater.start_polling()
-    await app.updater.wait_for_stop()
+    await app.run_polling()
 
-if __name__ == "__main__":
+
+if _name_ == "_main_":
     import asyncio
     asyncio.run(main())
