@@ -16,8 +16,8 @@ from telegram.ext import (
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(_name_)
 
-BOT_TOKEN = "PUT_YOUR_BOTFATHER_TOKEN_HERE"
-PROVIDER_TOKEN = "PUT_YOUR_STARS_PROVIDER_TOKEN_HERE"  # Stars Payments
+BOT_TOKEN = "7997403475:AAESngpsopLXiZr4iVfqDbLy0XFj7kCFsjg"
+PROVIDER_TOKEN = ""  # Stars Payments
 
 # ------------------------------------------
 # START COMMAND
