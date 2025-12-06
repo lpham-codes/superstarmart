@@ -14,7 +14,7 @@ from telegram.ext import (
 )
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(_name_)
+logger = logging.getLogger(__name__)
 
 BOT_TOKEN = "7997403475:AAESngpsopLXiZr4iVfqDbLy0XFj7kCFsjg"
 PROVIDER_TOKEN = ""  # Stars Payments
@@ -49,6 +49,6 @@ def main():
     app.add_handler(CommandHandler("start", start))
     app.run_polling()
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     import asyncio
     asyncio.run(main())
